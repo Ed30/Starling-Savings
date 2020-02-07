@@ -1,16 +1,20 @@
 PODS:
   - Alamofire (5.0.0-rc.3)
+  - EFCountingLabel (5.1.1)
 
 DEPENDENCIES:
   - Alamofire (~> 5.0.0-rc.3)
+  - EFCountingLabel
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - EFCountingLabel
 
 SPEC CHECKSUMS:
   Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
+  EFCountingLabel: 605358591a67a3c92feb7ec32486bfab4a30e2c9
 
-PODFILE CHECKSUM: c1c2dd63fca249ed7ea8dbf8cddabdb5f555b42a
+PODFILE CHECKSUM: 7e01c7db2f76cf8cf9a75661b19a8bc366b82080
 
 COCOAPODS: 1.8.4

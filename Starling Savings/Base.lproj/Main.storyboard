@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dJb-hs-xng">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
+        <!--Current Account-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="Starling_Savings" customModuleProvider="target" sceneMemberID="viewController">
@@ -15,27 +17,175 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PyQ-l7-FhX">
-                                <rect key="frame" x="176.5" y="164" width="61" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Vpl-jb-1nX" userLabel="Main Stack View">
+                                <rect key="frame" x="20" y="64" width="374" height="715.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="h9s-Bu-T5Y" userLabel="Header Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="fBk-a0-2i0">
+                                                <rect key="frame" x="0.0" y="0.0" width="330" height="44"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Loading...">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="30" name="HelveticaNeue-Bold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pzg-2g-tYD">
+                                                <rect key="frame" x="330" y="0.0" width="44" height="44"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile" translatesAutoresizingMaskIntoConstraints="NO" id="TrB-rw-PlI">
+                                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="TrB-rw-PlI" secondAttribute="height" id="359-Lg-TwJ"/>
+                                                        </constraints>
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="TrB-rw-PlI" firstAttribute="top" secondItem="pzg-2g-tYD" secondAttribute="top" id="9vg-tC-Tqp"/>
+                                                    <constraint firstAttribute="trailing" secondItem="TrB-rw-PlI" secondAttribute="trailing" id="Lb9-vx-tdU"/>
+                                                    <constraint firstAttribute="bottom" secondItem="TrB-rw-PlI" secondAttribute="bottom" id="gnE-h2-lWo"/>
+                                                    <constraint firstItem="TrB-rw-PlI" firstAttribute="leading" secondItem="pzg-2g-tYD" secondAttribute="leading" id="olr-KS-n7f"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="37f-7E-BVX" userLabel="Balance Stack View">
+                                        <rect key="frame" x="0.0" y="190.5" width="374" height="101"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fu9-QA-YJp">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="50.5"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Your Balance:">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="24" name="STHeitiTC-Light"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PyQ-l7-FhX" customClass="EFCountingLabel" customModule="EFCountingLabel">
+                                                <rect key="frame" x="0.0" y="50.5" width="374" height="50.5"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="£0,000.00">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="36" name="STHeitiTC-Medium"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="NmF-X3-jL4" userLabel="Roundup Stack View">
+                                        <rect key="frame" x="0.0" y="438" width="374" height="101"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uc7-Uj-O4m">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="50.5"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Roundups This Week:">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="24" name="STHeitiTC-Light"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ArJ-MP-M3c" customClass="EFCountingLabel" customModule="EFCountingLabel">
+                                                <rect key="frame" x="0.0" y="50.5" width="374" height="50.5"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="£00.00">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="36" name="STHeitiTC-Medium"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3q5-kr-uIH">
+                                        <rect key="frame" x="0.0" y="685.5" width="374" height="30"/>
+                                        <state key="normal" title="Transfer Funds"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="PyQ-l7-FhX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gSn-sM-oaD"/>
-                            <constraint firstItem="PyQ-l7-FhX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="120" id="o4k-Dy-vnV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Vpl-jb-1nX" secondAttribute="bottom" constant="33.5" id="8mt-xr-zzQ"/>
+                            <constraint firstItem="Vpl-jb-1nX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Apl-OL-q4R"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Vpl-jb-1nX" secondAttribute="trailing" constant="20" id="pNA-mG-qEc"/>
+                            <constraint firstItem="Vpl-jb-1nX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="sKn-hj-GC8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Current Account" image="creditcard.fill" catalog="system" id="zUI-eb-bru"/>
                     <connections>
                         <outlet property="balanceLabel" destination="PyQ-l7-FhX" id="V45-xn-jzY"/>
+                        <outlet property="profileImageView" destination="TrB-rw-PlI" id="M8n-UJ-Qcg"/>
+                        <outlet property="roundupsLabel" destination="ArJ-MP-M3c" id="XoM-h7-q1K"/>
+                        <outlet property="welcomeBackLabel" destination="fBk-a0-2i0" id="crl-Tz-MQy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="138"/>
+            <point key="canvasLocation" x="1109" y="-243"/>
+        </scene>
+        <!--Savings-->
+        <scene sceneID="tK4-1w-c3z">
+            <objects>
+                <viewController id="9vW-p0-lET" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="q3I-l3-9tk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="8Vc-eM-LZA"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Savings" image="sterlingsign.square.fill" catalog="system" id="LmY-H7-9b9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xdB-e6-S2E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1278" y="469"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="jSg-Vg-OVY">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="dJb-hs-xng" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="emC-Qr-b6z">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="CGD-z7-eE3"/>
+                        <segue destination="9vW-p0-lET" kind="relationship" relationship="viewControllers" id="jIn-eu-Nzt"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NyJ-C8-eQv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="141" y="161"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Profile" width="133" height="133"/>
+        <image name="creditcard.fill" catalog="system" width="64" height="44"/>
+        <image name="sterlingsign.square.fill" catalog="system" width="64" height="56"/>
+    </resources>
 </document>
