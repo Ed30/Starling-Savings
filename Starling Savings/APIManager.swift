@@ -42,9 +42,33 @@ struct APIManager {
         
     }
     
-    func getAccounts() {
+    
+    func getFirstAccountAndDefaultCategory(handler: @escaping (String, String) -> Void) {
         
         let accountsURL = "/api/v2/accounts"
+        
+        APIGetRequest(requestURL: accountsURL) { result in
+            
+            //Extract received data from JSON
+            do {
+                if let contents = try JSONSerialization.jsonObject(with: result, options: []) as? [String : Any] {
+                    if let accounts = contents["accounts"] as? [Any] {
+                        if let firstAccount = accounts[0] as? [String : Any] {
+                            if let accountUid = firstAccount["accountUid"] as? String {
+                                if let categoryUid = firstAccount["defaultCategory"] as? String {
+                                    print("ACCOUNT ID IS", accountUid)
+                                    print("CATEGORY ID IS", categoryUid)
+                                    handler(accountUid, categoryUid)
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch let error {
+                print(error.localizedDescription)
+                self.displayWarning()
+            }
+        }
         
     }
     
@@ -75,10 +99,12 @@ struct APIManager {
         
     }
     
-    func getTransactionsBetweenDates(startDate: String, endDate: String) {
+    
+    func getLastWeekRoundups(forAccountId accountId : String, categoryId : String, handler: @escaping (Double) -> Void) {
         
         //Remember to also attach queries for dates
-        let transactionsURL = "/api/v2/feed/account/{accountUid}/category/{categoryUid}/transactions-between"
+        let transactionsURL = "/api/v2/feed/account/\(accountId)/category/\(categoryId)/transactions-between"
+        
         
     }
     

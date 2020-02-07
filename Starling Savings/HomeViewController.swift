@@ -29,21 +29,18 @@ class HomeViewController: UIViewController {
         apiManager.getClientName { (name) in
             self.updateWelcomeBackLabel(withName: name)
         }
-        
-        apiManager.getBalance(forAccountId: "403e74b2-7f26-4c78-8f76-353154fd8b63") { balance in
-            self.updateBalanceLabel(withNewBalance: balance)
+                
+        apiManager.getFirstAccountAndDefaultCategory { accountId, categoryId in
+            
+            self.apiManager.getBalance(forAccountId: accountId) { balance in
+                self.updateBalanceLabel(withNewBalance: balance)
+            }
+            
+            self.apiManager.getLastWeekRoundups(forAccountId: accountId, categoryId: categoryId) { amount in
+                
+            }
+            
         }
-        
-        //{ balance in
-            
-        //    balanceLabel.text = balance
-            
-        //}
-        
-        
-        
-        
-        
     }
     
     
