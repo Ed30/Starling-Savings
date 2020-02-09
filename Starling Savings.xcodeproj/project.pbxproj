@@ -14,8 +14,8 @@
 		2B92307A23EC7329004129F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B92307923EC7329004129F6 /* Assets.xcassets */; };
 		2B92307D23EC7329004129F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B92307B23EC7329004129F6 /* LaunchScreen.storyboard */; };
 		2BFDF88B23EC8A5700102CD2 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFDF88A23EC8A5700102CD2 /* APIManager.swift */; };
-		2BFDF88D23EC8B4100102CD2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFDF88C23EC8B4100102CD2 /* User.swift */; };
 		2BFDF88F23ECC55400102CD2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFDF88E23ECC55400102CD2 /* Extensions.swift */; };
+		2BFDF8B123EF524E00102CD2 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFDF8B023EF524E00102CD2 /* DataManager.swift */; };
 		8BABCBE348C28ACB18269BF6 /* Pods_Starling_Savings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B42D8DF19622AE99F873BE /* Pods_Starling_Savings.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,8 +30,8 @@
 		2B92307C23EC7329004129F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B92307E23EC7329004129F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BFDF88A23EC8A5700102CD2 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
-		2BFDF88C23EC8B4100102CD2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2BFDF88E23ECC55400102CD2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		2BFDF8B023EF524E00102CD2 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		42B42D8DF19622AE99F873BE /* Pods_Starling_Savings.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Starling_Savings.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0E9E244416E3D38B3CB7157 /* Pods-Starling Savings.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Starling Savings.debug.xcconfig"; path = "Target Support Files/Pods-Starling Savings/Pods-Starling Savings.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,9 +76,9 @@
 				2B92307923EC7329004129F6 /* Assets.xcassets */,
 				2B92307B23EC7329004129F6 /* LaunchScreen.storyboard */,
 				2B92307E23EC7329004129F6 /* Info.plist */,
-				2BFDF88A23EC8A5700102CD2 /* APIManager.swift */,
-				2BFDF88C23EC8B4100102CD2 /* User.swift */,
 				2BFDF88E23ECC55400102CD2 /* Extensions.swift */,
+				2BFDF88A23EC8A5700102CD2 /* APIManager.swift */,
+				2BFDF8B023EF524E00102CD2 /* DataManager.swift */,
 			);
 			path = "Starling Savings";
 			sourceTree = "<group>";
@@ -218,7 +218,7 @@
 				2BFDF88B23EC8A5700102CD2 /* APIManager.swift in Sources */,
 				2BFDF88F23ECC55400102CD2 /* Extensions.swift in Sources */,
 				2B92307523EC7329004129F6 /* HomeViewController.swift in Sources */,
-				2BFDF88D23EC8B4100102CD2 /* User.swift in Sources */,
+				2BFDF8B123EF524E00102CD2 /* DataManager.swift in Sources */,
 				2B92307123EC7329004129F6 /* AppDelegate.swift in Sources */,
 				2B92307323EC7329004129F6 /* SceneDelegate.swift in Sources */,
 			);

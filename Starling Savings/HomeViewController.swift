@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var roundupsLabel: EFCountingLabel!
     
     let apiManager = APIManager()
+    let dataManager = DataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +37,9 @@ class HomeViewController: UIViewController {
                 self.updateBalanceLabel(withNewBalance: balance)
             }
             
-            self.apiManager.getLastWeekRoundups(forAccountId: accountId, categoryId: categoryId) { amount in
-                
+            self.apiManager.getWeekOutboundTransactionAmounts(forAccountId: accountId, categoryId: categoryId) { amounts in
+                let roundups = self.dataManager.aggregateRoundups(forMinorUnits: amounts)
+                self.updateRoundupsLabel(withNewAmount: roundups)
             }
             
         }
@@ -55,14 +57,18 @@ class HomeViewController: UIViewController {
         balanceLabel.setUpdateBlock { value, label in
             label.text = String(format: "£%.2f%", locale: Locale.current, value)
         }
-        
         balanceLabel.counter.timingFunction = EFTimingFunction.easeInOut(easingRate: 3)
         balanceLabel.countFrom(0, to: CGFloat(balance), withDuration: 1.0)
     }
     
     
-    func updateRoundupsLabel() {
+    func updateRoundupsLabel(withNewAmount amount : Double) {
         
+        roundupsLabel.setUpdateBlock { value, label in
+            label.text = String(format: "£%.2f%", locale: Locale.current, value)
+        }
+        roundupsLabel.counter.timingFunction = EFTimingFunction.easeInOut(easingRate: 3)
+        roundupsLabel.countFrom(0, to: CGFloat(amount), withDuration: 1.0)
     }
     
     
@@ -74,12 +80,14 @@ class HomeViewController: UIViewController {
             parentView.layer.cornerRadius = cornerRadius
             parentView.layer.shadowColor = UIColor.darkGray.cgColor
             parentView.layer.shadowOffset = .zero
-            parentView.layer.shadowRadius = 30.0
-            parentView.layer.shadowOpacity = 0.4
+            parentView.layer.shadowRadius = 25.0
+            parentView.layer.shadowOpacity = 0.5
         }
         
         profileImageView.layer.cornerRadius = cornerRadius
         profileImageView.clipsToBounds = true
+        profileImageView.layer.borderColor = UIColor.lightGray.cgColor
+        profileImageView.layer.borderWidth = 2
         print(profileImageView.bounds.size)
         
     }

@@ -121,7 +121,7 @@
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3q5-kr-uIH">
                                         <rect key="frame" x="0.0" y="685.5" width="374" height="30"/>
-                                        <state key="normal" title="Transfer Funds"/>
+                                        <state key="normal" title="Transfer to Savings"/>
                                     </button>
                                 </subviews>
                             </stackView>

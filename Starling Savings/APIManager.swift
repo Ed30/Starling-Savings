@@ -16,7 +16,7 @@ struct APIManager {
     let headers : HTTPHeaders = [
     "Accept" : "application/json",
     "Content-Type": "application/json",
-    "Authorization" : "Bearer \(User.accessToken)"]
+    "Authorization" : "Bearer \(DataManager().userAccessToken)"]
     
     
     func getClientName(handler: @escaping (String) -> Void) {
@@ -83,7 +83,7 @@ struct APIManager {
             do {
                 if let contents = try JSONSerialization.jsonObject(with: result, options: []) as? [String : Any] {
                     if let effectiveBalance = contents["effectiveBalance"] as? [String : Any] {
-                        if let minorUnits = effectiveBalance["minorUnits"] as? Int64 {
+                        if let minorUnits = effectiveBalance["minorUnits"] as? Int {
                             let balance = Double(minorUnits/100)
                             print("BALANCE IS", balance)
                             handler(balance)
@@ -97,14 +97,61 @@ struct APIManager {
             
         }
         
+        
     }
     
     
-    func getLastWeekRoundups(forAccountId accountId : String, categoryId : String, handler: @escaping (Double) -> Void) {
+    
+    
+    func getWeekOutboundTransactionAmounts(forAccountId accountId : String, categoryId : String, handler: @escaping ([Int]) -> Void) {
         
-        //Remember to also attach queries for dates
-        let transactionsURL = "/api/v2/feed/account/\(accountId)/category/\(categoryId)/transactions-between"
+        let lastMonday = Date.today().previous(.monday, considerToday: true)
+        let transactionsURL = "/api/v2/feed/account/\(accountId)/category/\(categoryId)/\(transactionsRequestURL(fromDate: lastMonday))"
+        var transactionAmounts = [Int]()
         
+        APIGetRequest(requestURL: transactionsURL) { result in
+            
+            //Extract received data from JSON
+            do {
+                if let contents = try JSONSerialization.jsonObject(with: result, options: []) as? [String : Any] {
+                    if let feedItems = contents["feedItems"] as? [[String : Any]] {
+                        for transaction in feedItems {
+                            if let direction = transaction["direction"] as? String {
+                                if direction == "OUT" {
+                                    if let amount = transaction["amount"] as? [String : Any] {
+                                        if let minorUnits = amount["minorUnits"] as? Int {
+                                            transactionAmounts.append(minorUnits)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        handler(transactionAmounts)
+                    }
+                }
+            } catch let error {
+                print(error.localizedDescription)
+                self.displayWarning()
+            }
+        }
+    }
+    
+    
+    private func transactionsRequestURL(fromDate startDate: Date, toDate endDate: Date = Date.today()) -> String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let startDateString = dateFormatter.string(from: startDate).components(separatedBy: " ")[0]
+        let startTimeString = "00:00:00"
+        
+        let endDateString = dateFormatter.string(from: endDate).components(separatedBy: " ")[0]
+        let endTimeString = dateFormatter.string(from: endDate).components(separatedBy: " ")[1]
+        
+        let firstTimeStamp = "minTransactionTimestamp=\(startDateString)T\(startTimeString).000Z"
+        let secondTimeStamp = "maxTransactionTimestamp=\(endDateString)T\(endTimeString).000Z"
+        
+        return "transactions-between?\(firstTimeStamp)&\(secondTimeStamp)"
         
     }
     
