@@ -2,8 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dJb-hs-xng">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,7 +28,7 @@
                                                 <attributedString key="attributedText">
                                                     <fragment content="Loading...">
                                                         <attributes>
-                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <font key="NSFont" size="30" name="HelveticaNeue-Bold"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
@@ -58,7 +58,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="37f-7E-BVX" userLabel="Balance Stack View">
-                                        <rect key="frame" x="0.0" y="190.5" width="374" height="101"/>
+                                        <rect key="frame" x="0.0" y="180.5" width="374" height="101"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fu9-QA-YJp">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="50.5"/>
@@ -89,7 +89,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="NmF-X3-jL4" userLabel="Roundup Stack View">
-                                        <rect key="frame" x="0.0" y="438" width="374" height="101"/>
+                                        <rect key="frame" x="0.0" y="418" width="374" height="101"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uc7-Uj-O4m">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="50.5"/>
@@ -119,27 +119,41 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3q5-kr-uIH">
-                                        <rect key="frame" x="0.0" y="685.5" width="374" height="30"/>
-                                        <state key="normal" title="Transfer to Savings"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3q5-kr-uIH">
+                                        <rect key="frame" x="0.0" y="655.5" width="374" height="60"/>
+                                        <color key="backgroundColor" name="StarlingPurple"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="qYy-L9-ViZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Transfer to Savings" image="arrow.up.arrow.down.circle.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="18" scale="large" weight="bold"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Vpl-jb-1nX" secondAttribute="bottom" constant="33.5" id="8mt-xr-zzQ"/>
-                            <constraint firstItem="Vpl-jb-1nX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Apl-OL-q4R"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Vpl-jb-1nX" secondAttribute="trailing" constant="20" id="pNA-mG-qEc"/>
-                            <constraint firstItem="Vpl-jb-1nX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="sKn-hj-GC8"/>
+                            <constraint firstItem="M8J-XZ-dc5" firstAttribute="bottom" secondItem="Vpl-jb-1nX" secondAttribute="bottom" constant="33.5" id="8mt-xr-zzQ"/>
+                            <constraint firstItem="Vpl-jb-1nX" firstAttribute="leading" secondItem="M8J-XZ-dc5" secondAttribute="leading" constant="20" id="Apl-OL-q4R"/>
+                            <constraint firstItem="M8J-XZ-dc5" firstAttribute="trailing" secondItem="Vpl-jb-1nX" secondAttribute="trailing" constant="20" id="pNA-mG-qEc"/>
+                            <constraint firstItem="Vpl-jb-1nX" firstAttribute="top" secondItem="M8J-XZ-dc5" secondAttribute="top" constant="20" id="sKn-hj-GC8"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="M8J-XZ-dc5"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Current Account" image="creditcard.fill" catalog="system" id="zUI-eb-bru"/>
                     <connections>
                         <outlet property="balanceLabel" destination="PyQ-l7-FhX" id="V45-xn-jzY"/>
                         <outlet property="profileImageView" destination="TrB-rw-PlI" id="M8n-UJ-Qcg"/>
                         <outlet property="roundupsLabel" destination="ArJ-MP-M3c" id="XoM-h7-q1K"/>
+                        <outlet property="transferButton" destination="3q5-kr-uIH" id="3fS-Bd-F60"/>
                         <outlet property="welcomeBackLabel" destination="fBk-a0-2i0" id="crl-Tz-MQy"/>
                     </connections>
                 </viewController>
@@ -155,7 +169,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="8Vc-eM-LZA"/>
+                        <viewLayoutGuide key="safeArea" id="sA4-wJ-Skg"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Savings" image="sterlingsign.square.fill" catalog="system" id="LmY-H7-9b9"/>
                 </viewController>
@@ -172,6 +186,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="StarlingPurple"/>
+                        <color key="selectedImageTintColor" name="StarlingPurple"/>
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="CGD-z7-eE3"/>
@@ -185,7 +201,11 @@
     </scenes>
     <resources>
         <image name="Profile" width="133" height="133"/>
+        <image name="arrow.up.arrow.down.circle.fill" catalog="system" width="64" height="60"/>
         <image name="creditcard.fill" catalog="system" width="64" height="44"/>
         <image name="sterlingsign.square.fill" catalog="system" width="64" height="56"/>
+        <namedColor name="StarlingPurple">
+            <color red="0.45490196078431372" green="0.19607843137254902" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

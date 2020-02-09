@@ -18,6 +18,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var balanceLabel:EFCountingLabel!
     @IBOutlet weak var roundupsLabel: EFCountingLabel!
     
+    @IBOutlet weak var transferButton: UIButton!
+    
+    
     let apiManager = APIManager()
     let dataManager = DataManager()
     
@@ -26,6 +29,8 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         setUpProfileImage()
+        setUpTransferButton()
+        
         
         apiManager.getClientName { (name) in
             self.updateWelcomeBackLabel(withName: name)
@@ -49,6 +54,7 @@ class HomeViewController: UIViewController {
     func updateWelcomeBackLabel(withName name : String) {
         let firstName = name.components(separatedBy: " ")[0]
         welcomeBackLabel.text = "Welcome Back\n\(firstName)"
+//        welcomeBackLabel.textColor = #colorLiteral(red: 0.4156862745, green: 0.2588235294, blue: 0.9607843137, alpha: 1)
     }
     
     
@@ -72,6 +78,18 @@ class HomeViewController: UIViewController {
     }
     
     
+    func setUpTransferButton() {
+        
+        transferButton.layer.cornerRadius = 15
+        
+        transferButton.setTitleColor(UIColor.lightGray, for: .highlighted)
+        
+        let spacing : CGFloat = 70 // the amount of spacing to appear between image and title
+        transferButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: spacing)
+        transferButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
+        
+    }
+    
     func setUpProfileImage() {
         
         let cornerRadius : CGFloat = 48
@@ -79,6 +97,7 @@ class HomeViewController: UIViewController {
         if let parentView = profileImageView.superview {
             parentView.layer.cornerRadius = cornerRadius
             parentView.layer.shadowColor = UIColor.darkGray.cgColor
+//            parentView.layer.shadowColor = #colorLiteral(red: 0.4156862745, green: 0.2588235294, blue: 0.9607843137, alpha: 1)
             parentView.layer.shadowOffset = .zero
             parentView.layer.shadowRadius = 25.0
             parentView.layer.shadowOpacity = 0.5
@@ -86,8 +105,8 @@ class HomeViewController: UIViewController {
         
         profileImageView.layer.cornerRadius = cornerRadius
         profileImageView.clipsToBounds = true
-        profileImageView.layer.borderColor = UIColor.lightGray.cgColor
-        profileImageView.layer.borderWidth = 2
+        profileImageView.layer.borderColor = UIColor.black.cgColor
+        profileImageView.layer.borderWidth = 0.8
         print(profileImageView.bounds.size)
         
     }
