@@ -8,6 +8,7 @@
 
 import UIKit
 import EFCountingLabel
+import SPAlert
 
 class HomeViewController: UIViewController {
 
@@ -49,6 +50,18 @@ class HomeViewController: UIViewController {
             
         }
     }
+    
+    
+    @IBAction func transferButtonPressed(_ sender: Any) {
+        
+        
+        
+        SPAlert.present(title: "Done", preset: .done)
+        
+        
+        
+    }
+    
     
     
     func updateWelcomeBackLabel(withName name : String) {

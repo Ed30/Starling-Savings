@@ -128,13 +128,16 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Transfer to Savings" image="arrow.up.arrow.down.circle.fill" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="18" scale="large" weight="bold"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="bold"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="transferButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pV1-Ef-qo3"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -164,18 +167,111 @@
         <!--Savings-->
         <scene sceneID="tK4-1w-c3z">
             <objects>
-                <viewController id="9vW-p0-lET" sceneMemberID="viewController">
+                <viewController id="9vW-p0-lET" customClass="SavingsViewController" customModule="Starling_Savings" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="q3I-l3-9tk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yba-HK-P4u">
+                                <rect key="frame" x="20" y="64" width="374" height="200"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HL5-XJ-cQd">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="200"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="AgY-DY-GnV">
+                                                <rect key="frame" x="20" y="12" width="334" height="168"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvt-Nr-HNb">
+                                                        <rect key="frame" x="0.0" y="0.0" width="334" height="25.5"/>
+                                                        <attributedString key="attributedText">
+                                                            <fragment content="ROUNDUP SAVINGS">
+                                                                <attributes>
+                                                                    <color key="NSColor" white="0.33000000000000002" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <font key="NSFont" size="18" name="STHeitiTC-Medium"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="ZJV-0P-g7t">
+                                                        <rect key="frame" x="0.0" y="69.5" width="334" height="50.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MwH-5u-pZJ" customClass="EFCountingLabel" customModule="EFCountingLabel">
+                                                                <rect key="frame" x="0.0" y="0.0" width="167" height="50.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="000.00">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="36" name="STHeitiTC-Medium"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGW-Qv-Eby">
+                                                                <rect key="frame" x="167" y="22.5" width="167" height="28"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="/£1000.00">
+                                                                        <attributes>
+                                                                            <color key="NSColor" red="0.396808826639793" green="0.4007376269035533" blue="0.4007376269035533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <font key="NSFont" size="20" name="STHeitiTC-Light"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P91-d2-Tyb">
+                                                        <rect key="frame" x="0.0" y="164" width="334" height="4"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="4" id="2G9-9z-wr2"/>
+                                                        </constraints>
+                                                        <color key="progressTintColor" name="StarlingPurple"/>
+                                                    </progressView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="AgY-DY-GnV" secondAttribute="trailing" constant="20" id="C70-uH-Sfd"/>
+                                            <constraint firstAttribute="bottom" secondItem="AgY-DY-GnV" secondAttribute="bottom" constant="20" id="euP-Dj-BDp"/>
+                                            <constraint firstItem="AgY-DY-GnV" firstAttribute="leading" secondItem="HL5-XJ-cQd" secondAttribute="leading" constant="20" id="mol-Jr-ixA"/>
+                                            <constraint firstItem="AgY-DY-GnV" firstAttribute="top" secondItem="HL5-XJ-cQd" secondAttribute="top" constant="12" id="t7g-5N-Q8W"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="HL5-XJ-cQd" secondAttribute="bottom" id="25G-aE-3QT"/>
+                                    <constraint firstAttribute="height" constant="200" id="5yL-gY-Hv1"/>
+                                    <constraint firstAttribute="trailing" secondItem="HL5-XJ-cQd" secondAttribute="trailing" id="8eL-xV-eIj"/>
+                                    <constraint firstItem="HL5-XJ-cQd" firstAttribute="top" secondItem="Yba-HK-P4u" secondAttribute="top" id="FwC-yZ-3tG"/>
+                                    <constraint firstItem="HL5-XJ-cQd" firstAttribute="leading" secondItem="Yba-HK-P4u" secondAttribute="leading" id="HRZ-dk-0Jn"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="sA4-wJ-Skg" firstAttribute="trailing" secondItem="Yba-HK-P4u" secondAttribute="trailing" constant="20" id="rDR-7h-MK8"/>
+                            <constraint firstItem="Yba-HK-P4u" firstAttribute="leading" secondItem="sA4-wJ-Skg" secondAttribute="leading" constant="20" id="rrM-kr-KZf"/>
+                            <constraint firstItem="Yba-HK-P4u" firstAttribute="top" secondItem="sA4-wJ-Skg" secondAttribute="top" constant="20" id="zQb-Gn-16v"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="sA4-wJ-Skg"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Savings" image="sterlingsign.square.fill" catalog="system" id="LmY-H7-9b9"/>
+                    <connections>
+                        <outlet property="savingsGoalView" destination="HL5-XJ-cQd" id="zwW-80-SmG"/>
+                        <outlet property="savingsLabel" destination="MwH-5u-pZJ" id="oUA-Cg-OfB"/>
+                        <outlet property="savingsProgressView" destination="P91-d2-Tyb" id="k6h-SE-VYq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xdB-e6-S2E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1278" y="469"/>
+            <point key="canvasLocation" x="1276.8115942028987" y="468.75"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="jSg-Vg-OVY">

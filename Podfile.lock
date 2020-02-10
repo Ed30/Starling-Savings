@@ -1,20 +1,24 @@
 PODS:
   - Alamofire (5.0.0-rc.3)
   - EFCountingLabel (5.1.1)
+  - SPAlert (2.1.1)
 
 DEPENDENCIES:
   - Alamofire (~> 5.0.0-rc.3)
   - EFCountingLabel
+  - SPAlert
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - EFCountingLabel
+    - SPAlert
 
 SPEC CHECKSUMS:
   Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
   EFCountingLabel: 605358591a67a3c92feb7ec32486bfab4a30e2c9
+  SPAlert: 4ea95d93f3bc6b2df533559e7ff96ce378d2507e
 
-PODFILE CHECKSUM: 7e01c7db2f76cf8cf9a75661b19a8bc366b82080
+PODFILE CHECKSUM: d816104b7869c0e6fc1c246164b0efce5304b3e0
 
 COCOAPODS: 1.8.4

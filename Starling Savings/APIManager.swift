@@ -84,7 +84,7 @@ struct APIManager {
                 if let contents = try JSONSerialization.jsonObject(with: result, options: []) as? [String : Any] {
                     if let effectiveBalance = contents["effectiveBalance"] as? [String : Any] {
                         if let minorUnits = effectiveBalance["minorUnits"] as? Int {
-                            let balance = Double(minorUnits/100)
+                            let balance = Double(minorUnits)/100.0
                             print("BALANCE IS", balance)
                             handler(balance)
                         }
@@ -127,6 +127,31 @@ struct APIManager {
                             }
                         }
                         handler(transactionAmounts)
+                    }
+                }
+            } catch let error {
+                print(error.localizedDescription)
+                self.displayWarning()
+            }
+        }
+    }
+    
+    
+    func getSavingsGoalAmount(forAccountId accountId : String, goalId : String, handler: @escaping (Double) -> Void) {
+        
+        let goalsURL = "/api/v2/account/\(accountId)/savings-goals/\(goalId)"
+        
+        APIGetRequest(requestURL: goalsURL) { result in
+            
+            //Extract received data from JSON
+            do {
+                if let contents = try JSONSerialization.jsonObject(with: result, options: []) as? [String : Any] {
+                    if let totalSaved = contents["totalSaved"] as? [String : Any] {
+                        if let minorUnits = totalSaved["minorUnits"] as? Int {
+                            let saved = Double(minorUnits)/100.0
+                            print("TOTAL SAVED ", saved)
+                            handler(saved)
+                        }
                     }
                 }
             } catch let error {
