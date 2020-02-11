@@ -39,23 +39,16 @@ class HomeViewController: UIViewController {
     
     @IBAction func transferButtonPressed(_ sender: Any) {
         
-        guard let labelAmount = roundupsLabel.text else {
-            Alert.genericError()
-            return
-        }
-        
-        guard let amount = Double(String(labelAmount.dropFirst())) else {
-            Alert.genericError()
-            return
-        }
+        guard let minorUnits = dataManager.minorUnitsFromLabel(roundupsLabel) else {return}
         
         apiManager.getFirstAccountAndDefaultCategory { accountId, _ in
             
-            self.apiManager.addFundsToSavingsGoal(forAccountId: accountId, goalId: self.dataManager.savingsGoalId, amount: amount) { success in
+            self.apiManager.addFundsToSavingsGoal(forAccountId: accountId, goalId: Defaults.User.savingsGoalId, amount: minorUnits) { success in
                 
                 if success {
                     Alert.done()
                     self.getBalanceAndRoundups()
+                    Defaults.savingsScreenNeedsUpdate = true
                 } else {
                     Alert.genericError()
                 }
@@ -75,13 +68,13 @@ class HomeViewController: UIViewController {
         apiManager.getFirstAccountAndDefaultCategory { accountId, categoryId in
             
             self.apiManager.getBalance(forAccountId: accountId) { balance in
-                self.updateBalanceLabel(withNewBalance: balance)
+                self.updateFigureLabel(self.balanceLabel, toNewAmount: balance)
                 
             }
             
-            self.apiManager.getWeekOutboundTransactionAmounts(forAccountId: accountId, categoryId: categoryId) { amounts in
-                let roundups = self.dataManager.aggregateRoundups(forMinorUnits: amounts)
-                self.updateRoundupsLabel(withNewAmount: roundups)
+            self.apiManager.getThisWeeksTransactions(forAccountId: accountId, categoryId: categoryId) { transactions in
+                let roundups = self.dataManager.newRoundupsFor(allTransactions: transactions)
+                self.updateFigureLabel(self.roundupsLabel, toNewAmount: roundups)
             }
         }
     }
@@ -93,29 +86,24 @@ class HomeViewController: UIViewController {
     }
     
     
-    func updateBalanceLabel(withNewBalance balance : Double) {
+    func updateFigureLabel(_ label : EFCountingLabel, toNewAmount minorUnits : Int) {
         
-        balanceLabel.setUpdateBlock { value, label in
+        guard let previousMinorUnits = dataManager.minorUnitsFromLabel(label) else {return}
+        
+        let previousValue = CGFloat(previousMinorUnits)/100
+        let newValue = CGFloat(minorUnits)/100
+        
+        label.setUpdateBlock { value, label in
             label.text = String(format: "£%.2f%", locale: Locale.current, value)
         }
-        balanceLabel.counter.timingFunction = EFTimingFunction.easeInOut(easingRate: 3)
-        balanceLabel.countFrom(0, to: CGFloat(balance), withDuration: 1.0)
-    }
-    
-    
-    func updateRoundupsLabel(withNewAmount amount : Double) {
-        
-        roundupsLabel.setUpdateBlock { value, label in
-            label.text = String(format: "£%.2f%", locale: Locale.current, value)
-        }
-        roundupsLabel.counter.timingFunction = EFTimingFunction.easeInOut(easingRate: 3)
-        roundupsLabel.countFrom(0, to: CGFloat(amount), withDuration: 1.0)
+        label.counter.timingFunction = EFTimingFunction.easeInOut(easingRate: 3)
+        label.countFrom(previousValue, to: newValue, withDuration: Defaults.UI.labelUpdateTime)
     }
     
     
     func setUpTransferButton() {
         
-        transferButton.layer.cornerRadius = 15
+        transferButton.layer.cornerRadius = Defaults.UI.viewCornerRadius
         transferButton.setTitleColor(UIColor.lightGray, for: .highlighted)
         
         let imageSpacing : CGFloat = 70
@@ -127,17 +115,15 @@ class HomeViewController: UIViewController {
     
     func setUpProfileImage() {
         
-        let cornerRadius : CGFloat = 48
-        
         if let parentView = profileImageView.superview {
-            parentView.layer.cornerRadius = cornerRadius
+            parentView.layer.cornerRadius = Defaults.UI.profileImageCornerRadius
             parentView.layer.shadowColor = UIColor.darkGray.cgColor
             parentView.layer.shadowOffset = .zero
             parentView.layer.shadowRadius = 25.0
             parentView.layer.shadowOpacity = 0.5
         }
         
-        profileImageView.layer.cornerRadius = cornerRadius
+        profileImageView.layer.cornerRadius = Defaults.UI.profileImageCornerRadius
         profileImageView.clipsToBounds = true
         profileImageView.layer.borderColor = UIColor.black.cgColor
         profileImageView.layer.borderWidth = 0.8

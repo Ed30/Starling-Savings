@@ -16,7 +16,7 @@ struct APIManager {
     let headers : HTTPHeaders = [
     "Accept" : "application/json",
     "Content-Type": "application/json",
-    "Authorization" : "Bearer \(DataManager().userAccessToken)"]
+    "Authorization" : "Bearer \(Defaults.User.accessToken)"]
     
     
     func getClientName(handler: @escaping (String) -> Void) {
@@ -69,7 +69,7 @@ struct APIManager {
     }
     
     
-    func getBalance(forAccountId id: String, handler: @escaping (Double) -> Void) {
+    func getBalance(forAccountId id: String, handler: @escaping (Int) -> Void) {
         
         let balanceURL = "/api/v2/accounts/\(id)/balance"
         
@@ -80,9 +80,8 @@ struct APIManager {
                 if let contents = try JSONSerialization.jsonObject(with: result, options: []) as? [String : Any] {
                     if let effectiveBalance = contents["effectiveBalance"] as? [String : Any] {
                         if let minorUnits = effectiveBalance["minorUnits"] as? Int {
-                            let balance = Double(minorUnits)/100.0
-                            print("BALANCE IS", balance)
-                            handler(balance)
+                            print("BALANCE IS", minorUnits)
+                            handler(minorUnits)
                         }
                     }
                 }
@@ -94,12 +93,12 @@ struct APIManager {
     }
     
     
-    func getWeekOutboundTransactionAmounts(forAccountId accountId : String, categoryId : String, handler: @escaping ([Int]) -> Void) {
+    func getThisWeeksTransactions(forAccountId accountId : String, categoryId : String, handler: @escaping ([Transaction]) -> Void) {
         
         let lastMonday = Date.today().previous(.monday, considerToday: true)
         let transactionsURL = "/api/v2/feed/account/\(accountId)/category/\(categoryId)/transactions-between"
         let parameters = APIParameters.transactionsRequest(fromDate: lastMonday)
-        var transactionAmounts = [Int]()
+        var transactions = [Transaction]()
         
         httpRequest(requestURL: transactionsURL, .get, parameters: parameters) { result in
             
@@ -107,18 +106,20 @@ struct APIManager {
             do {
                 if let contents = try JSONSerialization.jsonObject(with: result, options: []) as? [String : Any] {
                     if let feedItems = contents["feedItems"] as? [[String : Any]] {
-                        for transaction in feedItems {
-                            if let direction = transaction["direction"] as? String {
-                                if direction == "OUT" {
-                                    if let amount = transaction["amount"] as? [String : Any] {
-                                        if let minorUnits = amount["minorUnits"] as? Int {
-                                            transactionAmounts.append(minorUnits)
-                                        }
-                                    }
-                                }
+                        for item in feedItems {
+                            
+                            if let amount = item["amount"] as? [String : Any] {
+                                
+                                guard let uId = item["feedItemUid"] as? String else {break}
+                                guard let minorUnits = amount["minorUnits"] as? Int else {break}
+                                guard let direction = Direction(rawValue: item["direction"] as? String ?? "UNDEFINED") else {break}
+                                guard let time = item["transactionTime"] as? String else {break}
+                                guard let counterPartyName = item["counterPartyName"] as? String else {break}
+                                
+                                transactions.append(Transaction(uId: uId, minorUnits: minorUnits, direction: direction, time: time, counterPartyName: counterPartyName))
                             }
                         }
-                        handler(transactionAmounts)
+                        handler(transactions)
                     }
                 }
             } catch let error {
@@ -129,7 +130,7 @@ struct APIManager {
     }
     
     
-    func getSavingsGoalAmount(forAccountId accountId : String, goalId : String, handler: @escaping (Double) -> Void) {
+    func getSavingsGoalAmount(forAccountId accountId : String, goalId : String, handler: @escaping (Int) -> Void) {
         
         let goalsURL = "/api/v2/account/\(accountId)/savings-goals/\(goalId)"
         
@@ -140,9 +141,8 @@ struct APIManager {
                 if let contents = try JSONSerialization.jsonObject(with: result, options: []) as? [String : Any] {
                     if let totalSaved = contents["totalSaved"] as? [String : Any] {
                         if let minorUnits = totalSaved["minorUnits"] as? Int {
-                            let saved = Double(minorUnits)/100.0
-                            print("TOTAL SAVED", saved)
-                            handler(saved)
+                            print("TOTAL SAVED", minorUnits)
+                            handler(minorUnits)
                         }
                     }
                 }
@@ -154,11 +154,11 @@ struct APIManager {
     }
     
     
-    func addFundsToSavingsGoal(forAccountId accountId : String, goalId : String, amount: Double, handler: @escaping (Bool) -> Void) {
+    func addFundsToSavingsGoal(forAccountId accountId : String, goalId : String, amount: Int, handler: @escaping (Bool) -> Void) {
         
         let transferUid = UUID().uuidString.lowercased()
         let addFundsURL = "/api/v2/account/\(accountId)/savings-goals/\(goalId)/add-money/\(transferUid)"
-        let parameters = APIParameters.addFundsToGoalRequest(minorUnits: Int(amount * 100))
+        let parameters = APIParameters.addFundsToGoalRequest(minorUnits: amount)
         
         
         httpRequest(requestURL: addFundsURL, .put, parameters: parameters) { result in

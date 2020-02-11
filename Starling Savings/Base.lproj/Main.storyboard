@@ -107,7 +107,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ArJ-MP-M3c" customClass="EFCountingLabel" customModule="EFCountingLabel">
                                                 <rect key="frame" x="0.0" y="50.5" width="374" height="50.5"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="£00.00">
+                                                    <fragment content="£0.00">
                                                         <attributes>
                                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                             <font key="NSFont" size="36" name="STHeitiTC-Medium"/>
