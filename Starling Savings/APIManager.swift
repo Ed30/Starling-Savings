@@ -23,7 +23,7 @@ struct APIManager {
         
         let clientNameURL = "/api/v2/account-holder/name"
         
-        APIGetRequest(requestURL: clientNameURL) { result in
+        httpRequest(requestURL: clientNameURL, .get) { result in
             
             //Extract received data from JSON
             do {
@@ -33,13 +33,10 @@ struct APIManager {
                     }
                 }
             } catch let error {
-                print(error.localizedDescription)
-                self.displayWarning()
+                Alert.genericError()
+                debugPrint(error.localizedDescription)
             }
-            
         }
-        
-        
     }
     
     
@@ -47,7 +44,7 @@ struct APIManager {
         
         let accountsURL = "/api/v2/accounts"
         
-        APIGetRequest(requestURL: accountsURL) { result in
+        httpRequest(requestURL: accountsURL, .get) { result in
             
             //Extract received data from JSON
             do {
@@ -65,11 +62,10 @@ struct APIManager {
                     }
                 }
             } catch let error {
-                print(error.localizedDescription)
-                self.displayWarning()
+                Alert.genericError()
+                debugPrint(error.localizedDescription)
             }
         }
-        
     }
     
     
@@ -77,7 +73,7 @@ struct APIManager {
         
         let balanceURL = "/api/v2/accounts/\(id)/balance"
         
-        APIGetRequest(requestURL: balanceURL) { result in
+        httpRequest(requestURL: balanceURL, .get) { result in
             
             //Extract received data from JSON
             do {
@@ -91,25 +87,21 @@ struct APIManager {
                     }
                 }
             } catch let error {
-                print(error.localizedDescription)
-                self.displayWarning()
+                Alert.genericError()
+                debugPrint(error.localizedDescription)
             }
-            
         }
-        
-        
     }
-    
-    
     
     
     func getWeekOutboundTransactionAmounts(forAccountId accountId : String, categoryId : String, handler: @escaping ([Int]) -> Void) {
         
         let lastMonday = Date.today().previous(.monday, considerToday: true)
-        let transactionsURL = "/api/v2/feed/account/\(accountId)/category/\(categoryId)/\(transactionsRequestURL(fromDate: lastMonday))"
+        let transactionsURL = "/api/v2/feed/account/\(accountId)/category/\(categoryId)/transactions-between"
+        let parameters = APIParameters.transactionsRequest(fromDate: lastMonday)
         var transactionAmounts = [Int]()
         
-        APIGetRequest(requestURL: transactionsURL) { result in
+        httpRequest(requestURL: transactionsURL, .get, parameters: parameters) { result in
             
             //Extract received data from JSON
             do {
@@ -130,8 +122,8 @@ struct APIManager {
                     }
                 }
             } catch let error {
-                print(error.localizedDescription)
-                self.displayWarning()
+                Alert.genericError()
+                debugPrint(error.localizedDescription)
             }
         }
     }
@@ -141,7 +133,7 @@ struct APIManager {
         
         let goalsURL = "/api/v2/account/\(accountId)/savings-goals/\(goalId)"
         
-        APIGetRequest(requestURL: goalsURL) { result in
+        httpRequest(requestURL: goalsURL, .get) { result in
             
             //Extract received data from JSON
             do {
@@ -149,68 +141,74 @@ struct APIManager {
                     if let totalSaved = contents["totalSaved"] as? [String : Any] {
                         if let minorUnits = totalSaved["minorUnits"] as? Int {
                             let saved = Double(minorUnits)/100.0
-                            print("TOTAL SAVED ", saved)
+                            print("TOTAL SAVED", saved)
                             handler(saved)
                         }
                     }
                 }
             } catch let error {
-                print(error.localizedDescription)
-                self.displayWarning()
+                Alert.genericError()
+                debugPrint(error.localizedDescription)
             }
         }
     }
     
     
-    private func transactionsRequestURL(fromDate startDate: Date, toDate endDate: Date = Date.today()) -> String {
+    func addFundsToSavingsGoal(forAccountId accountId : String, goalId : String, amount: Double, handler: @escaping (Bool) -> Void) {
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let transferUid = UUID().uuidString.lowercased()
+        let addFundsURL = "/api/v2/account/\(accountId)/savings-goals/\(goalId)/add-money/\(transferUid)"
+        let parameters = APIParameters.addFundsToGoalRequest(minorUnits: Int(amount * 100))
         
-        let startDateString = dateFormatter.string(from: startDate).components(separatedBy: " ")[0]
-        let startTimeString = "00:00:00"
         
-        let endDateString = dateFormatter.string(from: endDate).components(separatedBy: " ")[0]
-        let endTimeString = dateFormatter.string(from: endDate).components(separatedBy: " ")[1]
+        httpRequest(requestURL: addFundsURL, .put, parameters: parameters) { result in
         
-        let firstTimeStamp = "minTransactionTimestamp=\(startDateString)T\(startTimeString).000Z"
-        let secondTimeStamp = "maxTransactionTimestamp=\(endDateString)T\(endTimeString).000Z"
-        
-        return "transactions-between?\(firstTimeStamp)&\(secondTimeStamp)"
-        
+            print(parameters)
+            
+            do {
+                if let contents = try JSONSerialization.jsonObject(with: result, options: []) as? [String : Any] {
+                    if let success = contents["success"] as? Bool {
+                        print("FUNDS ADDED", success)
+                        handler(success)
+                    }
+                    
+                    if let errors = contents["errors"] {
+                        print(errors)
+                    }
+                    
+                }
+            } catch let error {
+                Alert.genericError()
+                debugPrint(error.localizedDescription)
+            }
+        }
     }
     
     
-    private func APIGetRequest(requestURL: String, handler: @escaping (Data) -> Void) {
+    private func httpRequest(requestURL: String, _ method: HTTPMethod, parameters : Parameters? = nil, handler: @escaping (Data) -> Void) {
         
-        let request = session.request(baseURL + requestURL, method: .get, headers: headers)
-       
+        let request : DataRequest
+        
+        switch (method) {
+        case .put:
+            request = session.request(baseURL + requestURL, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        default:
+            request = session.request(baseURL + requestURL, method: method, parameters: parameters, headers: headers)
+        }
+        
         request.responseData { response in
             switch response.result {
+            
             case let .success(result):
                 handler(result)
             
             case let .failure(error):
-                // Display a warning for the error.
-                self.displayWarning(error)
+                Alert.genericError()
+                debugPrint(error)
             }
         }
     }
     
-    
-    
-    private func displayWarning(_ error: AFError? = nil) {
-        
-        var errorMessage : String
-        
-        if let message = error?.errorDescription {
-            errorMessage = message
-        } else {
-            errorMessage = "An unexpected error occured. Please check your internet connection and try again."
-        }
-        let alert = UIAlertController(title: "Whoops!", message: errorMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-    }
     
 }
 

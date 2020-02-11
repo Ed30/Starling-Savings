@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2B3375A123F0AA9200DDBA8E /* SavingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3375A023F0AA9200DDBA8E /* SavingsViewController.swift */; };
+		2B3375A323F1BC5500DDBA8E /* APIParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3375A223F1BC5500DDBA8E /* APIParameters.swift */; };
+		2B3375A523F1CB1200DDBA8E /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3375A423F1CB1200DDBA8E /* Alert.swift */; };
 		2B92307123EC7329004129F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B92307023EC7329004129F6 /* AppDelegate.swift */; };
 		2B92307323EC7329004129F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B92307223EC7329004129F6 /* SceneDelegate.swift */; };
 		2B92307523EC7329004129F6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B92307423EC7329004129F6 /* HomeViewController.swift */; };
@@ -23,6 +25,8 @@
 /* Begin PBXFileReference section */
 		21BE5EC621423D79ED9ED6E4 /* Pods-Starling Savings.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Starling Savings.release.xcconfig"; path = "Target Support Files/Pods-Starling Savings/Pods-Starling Savings.release.xcconfig"; sourceTree = "<group>"; };
 		2B3375A023F0AA9200DDBA8E /* SavingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsViewController.swift; sourceTree = "<group>"; };
+		2B3375A223F1BC5500DDBA8E /* APIParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIParameters.swift; sourceTree = "<group>"; };
+		2B3375A423F1CB1200DDBA8E /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		2B92306D23EC7329004129F6 /* Starling Savings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Starling Savings.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B92307023EC7329004129F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B92307223EC7329004129F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 				2B92307E23EC7329004129F6 /* Info.plist */,
 				2BFDF88E23ECC55400102CD2 /* Extensions.swift */,
 				2BFDF88A23EC8A5700102CD2 /* APIManager.swift */,
+				2B3375A423F1CB1200DDBA8E /* Alert.swift */,
+				2B3375A223F1BC5500DDBA8E /* APIParameters.swift */,
 				2BFDF8B023EF524E00102CD2 /* DataManager.swift */,
 			);
 			path = "Starling Savings";
@@ -218,10 +224,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B3375A523F1CB1200DDBA8E /* Alert.swift in Sources */,
 				2BFDF88B23EC8A5700102CD2 /* APIManager.swift in Sources */,
 				2B3375A123F0AA9200DDBA8E /* SavingsViewController.swift in Sources */,
 				2BFDF88F23ECC55400102CD2 /* Extensions.swift in Sources */,
 				2B92307523EC7329004129F6 /* HomeViewController.swift in Sources */,
+				2B3375A323F1BC5500DDBA8E /* APIParameters.swift in Sources */,
 				2BFDF8B123EF524E00102CD2 /* DataManager.swift in Sources */,
 				2B92307123EC7329004129F6 /* AppDelegate.swift in Sources */,
 				2B92307323EC7329004129F6 /* SceneDelegate.swift in Sources */,

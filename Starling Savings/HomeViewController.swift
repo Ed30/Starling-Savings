@@ -27,47 +27,69 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         setUpProfileImage()
         setUpTransferButton()
         
+        getClientName()
+        getBalanceAndRoundups()
         
+    }
+    
+    
+    @IBAction func transferButtonPressed(_ sender: Any) {
+        
+        guard let labelAmount = roundupsLabel.text else {
+            Alert.genericError()
+            return
+        }
+        
+        guard let amount = Double(String(labelAmount.dropFirst())) else {
+            Alert.genericError()
+            return
+        }
+        
+        apiManager.getFirstAccountAndDefaultCategory { accountId, _ in
+            
+            self.apiManager.addFundsToSavingsGoal(forAccountId: accountId, goalId: self.dataManager.savingsGoalId, amount: amount) { success in
+                
+                if success {
+                    Alert.done()
+                    self.getBalanceAndRoundups()
+                } else {
+                    Alert.genericError()
+                }
+            }
+        }
+    }
+    
+    
+    func getClientName() {
         apiManager.getClientName { (name) in
             self.updateWelcomeBackLabel(withName: name)
         }
-                
+    }
+    
+    func getBalanceAndRoundups() {
+        
         apiManager.getFirstAccountAndDefaultCategory { accountId, categoryId in
             
             self.apiManager.getBalance(forAccountId: accountId) { balance in
                 self.updateBalanceLabel(withNewBalance: balance)
+                
             }
             
             self.apiManager.getWeekOutboundTransactionAmounts(forAccountId: accountId, categoryId: categoryId) { amounts in
                 let roundups = self.dataManager.aggregateRoundups(forMinorUnits: amounts)
                 self.updateRoundupsLabel(withNewAmount: roundups)
             }
-            
         }
     }
-    
-    
-    @IBAction func transferButtonPressed(_ sender: Any) {
-        
-        
-        
-        SPAlert.present(title: "Done", preset: .done)
-        
-        
-        
-    }
-    
     
     
     func updateWelcomeBackLabel(withName name : String) {
         let firstName = name.components(separatedBy: " ")[0]
         welcomeBackLabel.text = "Welcome Back\n\(firstName)"
-//        welcomeBackLabel.textColor = #colorLiteral(red: 0.4156862745, green: 0.2588235294, blue: 0.9607843137, alpha: 1)
     }
     
     
@@ -94,14 +116,14 @@ class HomeViewController: UIViewController {
     func setUpTransferButton() {
         
         transferButton.layer.cornerRadius = 15
-        
         transferButton.setTitleColor(UIColor.lightGray, for: .highlighted)
         
-        let spacing : CGFloat = 70 // the amount of spacing to appear between image and title
-        transferButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: spacing)
-        transferButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
-        
+        let imageSpacing : CGFloat = 70
+        let titleSpacing : CGFloat = 20
+        transferButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: imageSpacing)
+        transferButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: titleSpacing)
     }
+    
     
     func setUpProfileImage() {
         
@@ -110,7 +132,6 @@ class HomeViewController: UIViewController {
         if let parentView = profileImageView.superview {
             parentView.layer.cornerRadius = cornerRadius
             parentView.layer.shadowColor = UIColor.darkGray.cgColor
-//            parentView.layer.shadowColor = #colorLiteral(red: 0.4156862745, green: 0.2588235294, blue: 0.9607843137, alpha: 1)
             parentView.layer.shadowOffset = .zero
             parentView.layer.shadowRadius = 25.0
             parentView.layer.shadowOpacity = 0.5
@@ -120,11 +141,8 @@ class HomeViewController: UIViewController {
         profileImageView.clipsToBounds = true
         profileImageView.layer.borderColor = UIColor.black.cgColor
         profileImageView.layer.borderWidth = 0.8
-        print(profileImageView.bounds.size)
-        
     }
+
     
-
-
 }
 
