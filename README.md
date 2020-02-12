@@ -44,13 +44,17 @@ If you navigate over to the **Savings** tab, you will find a card view there rep
 
 ### Transfer
 
-Back in the Current Account tab, by tapping on the **Transfer to Savings** button, you should see the labels update once more. The main account has now been charged with the roundups amount, and the funds have been transferred over to the saving goal.
+Back in the Current Account tab, by tapping on the **Transfer to Savings** button, you should see the labels update once more, provided there were no errors.
+
+The main account has now been charged with the roundups amount, and the funds have been transferred over to the saving goal.
 
 On the right you can see a demonstration of the transfer procedure.
 
 ### Savings
 
-Upon loading the Savings View Controller again, this will have been notified of the transfer, and will update the card view's elements accordingly.
+After the transfer, the Savings View Controller will be notified it needs updating (through a global flag rather than the Notification Center)
+
+Upon loading the Savings View Controller again, it will update the card view's elements accordingly to take into account the last transfer made.
 
 
 ## Design Decisions
