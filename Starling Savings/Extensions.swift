@@ -7,10 +7,13 @@
 //
 
 import Foundation
-import UIKit
 
+/**
+Extensions file to hold functions and properties extening default classes,
+Eliminates the need for subclassing when the additions are not substantial.
+*/
 
-
+// Date class extension by Sandeep: https://stackoverflow.com/a/33397770
 extension Date {
 
   static func today() -> Date {
@@ -86,4 +89,5 @@ extension Date {
       }
     }
   }
+    
 }

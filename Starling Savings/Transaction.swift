@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+Basic Transaction struct to model the fundamental properties of a transaction.
+*/
 struct Transaction {
     
     let uId : String
@@ -18,6 +21,10 @@ struct Transaction {
     
 }
 
+
+/**
+Transaction Direction enum.
+*/
 enum Direction : String {
     case inBound = "IN"
     case outBound = "OUT"

@@ -6,9 +6,11 @@
 //  Copyright © 2020 Edward Theodor Danescu. All rights reserved.
 //
 
-import Foundation
 import SPAlert
 
+/**
+Alert struct with static functions to present alerts from anywhere within the app.
+*/
 struct Alert {
     
     static func genericError() {
