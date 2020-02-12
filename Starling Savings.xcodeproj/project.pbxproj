@@ -58,6 +58,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B3375AA23F4A78700DDBA8E /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2B92307423EC7329004129F6 /* HomeViewController.swift */,
+				2B3375A023F0AA9200DDBA8E /* SavingsViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		2B3375AB23F4A7DB00DDBA8E /* Data Processing */ = {
+			isa = PBXGroup;
+			children = (
+				2BFDF88A23EC8A5700102CD2 /* APIManager.swift */,
+				2BFDF8B023EF524E00102CD2 /* DataManager.swift */,
+				2B3375A223F1BC5500DDBA8E /* APIParameters.swift */,
+			);
+			path = "Data Processing";
+			sourceTree = "<group>";
+		};
+		2B3375AC23F4A84000DDBA8E /* Helper Files */ = {
+			isa = PBXGroup;
+			children = (
+				2B3375A623F2B93600DDBA8E /* Transaction.swift */,
+				2B3375A423F1CB1200DDBA8E /* Alert.swift */,
+				2B3375A823F2D02500DDBA8E /* Defaults.swift */,
+				2BFDF88E23ECC55400102CD2 /* Extensions.swift */,
+			);
+			path = "Helper Files";
+			sourceTree = "<group>";
+		};
 		2B92306423EC7329004129F6 = {
 			isa = PBXGroup;
 			children = (
@@ -79,21 +109,15 @@
 		2B92306F23EC7329004129F6 /* Starling Savings */ = {
 			isa = PBXGroup;
 			children = (
+				2B92307623EC7329004129F6 /* Main.storyboard */,
+				2B92307B23EC7329004129F6 /* LaunchScreen.storyboard */,
 				2B92307023EC7329004129F6 /* AppDelegate.swift */,
 				2B92307223EC7329004129F6 /* SceneDelegate.swift */,
-				2B3375A823F2D02500DDBA8E /* Defaults.swift */,
-				2B92307423EC7329004129F6 /* HomeViewController.swift */,
-				2B3375A023F0AA9200DDBA8E /* SavingsViewController.swift */,
-				2B92307623EC7329004129F6 /* Main.storyboard */,
+				2B3375AA23F4A78700DDBA8E /* View Controllers */,
+				2B3375AB23F4A7DB00DDBA8E /* Data Processing */,
+				2B3375AC23F4A84000DDBA8E /* Helper Files */,
 				2B92307923EC7329004129F6 /* Assets.xcassets */,
-				2B92307B23EC7329004129F6 /* LaunchScreen.storyboard */,
 				2B92307E23EC7329004129F6 /* Info.plist */,
-				2BFDF88E23ECC55400102CD2 /* Extensions.swift */,
-				2BFDF88A23EC8A5700102CD2 /* APIManager.swift */,
-				2B3375A423F1CB1200DDBA8E /* Alert.swift */,
-				2B3375A223F1BC5500DDBA8E /* APIParameters.swift */,
-				2BFDF8B023EF524E00102CD2 /* DataManager.swift */,
-				2B3375A623F2B93600DDBA8E /* Transaction.swift */,
 			);
 			path = "Starling Savings";
 			sourceTree = "<group>";
