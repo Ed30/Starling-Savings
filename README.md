@@ -52,20 +52,29 @@ On the right you can see a demonstration of the transfer procedure.
 
 ### Savings
 
-After the transfer, the Savings View Controller will be notified it needs updating (through a global flag rather than the Notification Center)
+After the transfer, the Savings View Controller will be notified it needs to update (through a global flag rather than the Notification Center).
 
 Upon loading the Savings View Controller again, it will update the card view's elements accordingly to take into account the last transfer made.
 
 
 ## Design Decisions
 
-Add additional notes about how to deploy this on a live system
+### General Structure
 
+* Two separate view controllers rather than just one, to better distinguish the main account from the saving goals.
+* Focus on the main functionality required for the challenge, thus:
+    * API calls only where necessary, such as for retrieving transactions, balance, transferring funds etc...
+    * Assumptions were made, such as one account and one saving goal only per client.
+    * Hardcoded goal id and target to cut down on API calls.
+
+### User Interface
+
+* The icon was obtained by inverting the colors of the original Staling app icon, to suggest a companion app.
+* Designs were achieved by following Apple's Human Interface Guidelines, while keeping Starling's purple color for highlights.
+
+### Code
 
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-
+* Date class extension by Sandeep: https://stackoverflow.com/a/33397770
