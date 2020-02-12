@@ -62,6 +62,7 @@ Upon loading the Savings View Controller again, it will update the card view's e
 ### General Structure
 
 * Two separate view controllers rather than just one, to better distinguish the main account from the saving goals.
+* Roundups computed from the beginning of the current week, and only since the last deposit into the saving goal.
 * Focus on the main functionality required for the challenge, thus:
     * API calls only where necessary, such as for retrieving transactions, balance, transferring funds etc...
     * Assumptions were made, such as one account and one saving goal only per client.
@@ -80,6 +81,7 @@ Upon loading the Savings View Controller again, it will update the card view's e
         }
     }
     ```
+* Made use of the Alamofire library for cleaner and more concise HTTP requests.
 
 ### User Interface
 
