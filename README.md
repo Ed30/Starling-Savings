@@ -28,7 +28,7 @@ Navigate to the repo directory locally and run:
 pod install
 ```
 
-This will add a pods folder to the directory, as well as the Starling Savings.xcworkspace file. Please only use this rather than the original Starling Savings.xcodeproj file from now on.
+This will add a pods folder to the directory, as well as the Starling Savings.xcworkspace file. Please only use this instead of the original Starling Savings.xcodeproj file from now on.
 
 ## Running the app
 
@@ -46,7 +46,7 @@ If you navigate over to the **Savings** tab, you will find a card view there rep
 
 Back in the Current Account tab, by tapping on the **Transfer to Savings** button, you should see the labels update once more, provided there were no errors.
 
-The main account has now been charged with the roundups amount, and the funds have been transferred over to the saving goal.
+The main account has now been charged with the roundups amount, and the funds transferred over to the saving goal.
 
 On the right you can see a demonstration of the transfer procedure.
 
@@ -67,17 +67,25 @@ Upon loading the Savings View Controller again, it will update the card view's e
     * Assumptions were made, such as one account and one saving goal only per client.
     * Hard-coded profile image, goal id and goal target amount to cut down on API calls.
 
-### User Interface
-
-* The icon was obtained by inverting the colors of the original Staling app icon, to suggest a companion app.
-* Designs were achieved by following Apple's Human Interface Guidelines. Starling's purple color was used for highlights.
-
 ### Code
 
 * Comments and documentation.
 * Multiple phases of refactoring to ensure code quality and minimise duplication.
 * Cohesion and loose coupling by keeping data retrieval, manipulation, and presentation in separate classes.
-* Made use of powerful Swift language features such as escaping closures for asynchronous operations.
+* Made use of powerful Swift language features such as escaping closures for asynchronous operations:
+    ```
+    func getClientName() {
+        apiManager.getClientName { (name) in
+            self.updateWelcomeBackLabel(withName: name)            
+        }
+    }
+    ```
+
+### User Interface
+
+* The icon was obtained by inverting the colors of the original Staling app icon, to suggest a companion app.
+* Designs were achieved by following Apple's Human Interface Guidelines. Starling's purple color was used for highlights.
+
 
 ## Acknowledgments
 
