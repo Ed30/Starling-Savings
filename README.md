@@ -32,11 +32,11 @@ This will add a pods folder to the directory, as well as the Starling Savings.xc
 
 ## Running the app
 
-<img align="right" width="433" height="700" src="img/Animation.gif">
-
 Open **Starling Savings.xcworkspace** and hit run. If you encounter any code signing issues, these should be easily solvable from the Signing and Capabilities tab in Starling Savings, under TARGETS in the project inspector.
 
 ### Startup
+
+<img align="right" width="433" height="700" src="img/Animation.gif">
 
 Upon starting up the app, you will find yourself in the **Current Account** tab, and you will see the balance and roundups labels update with a counting animation.
 
