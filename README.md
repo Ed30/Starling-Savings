@@ -3,7 +3,7 @@
 iOS application created as part of the Starling Bank technical challenge by Edward Danescu.
 
 <p align="center">
-  <img width="433" height="700" src="img/iPhones.png">
+  <img width="460" height="648" src="img/iPhones.png">
 </p>
 
 ## Getting Started
@@ -31,8 +31,7 @@ This will add a pods folder to the directory, as well as the Starling Savings.xc
 
 ## Running the app
 
+<img align="right" width="433" height="700" src="img/Animation.gif">
+
 Just start Starling Savings.xcworkspace and hit run. Note that you might have code signing issues, but these should be easily solvable from the "Signing and Capabilities" tab in TARGETS --> Starling Savings.
 
-<p align="center">
-  <img width="433" height="700" src="img/Animation.gif">
-</p>
