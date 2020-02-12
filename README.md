@@ -1,6 +1,6 @@
 # Starling Savings
 
-iOS application created as part of the Starling Bank technical challenge by Edward Danescu.
+iOS application created as part of the Starling Bank technical challenge by Edward Theodor Danescu.
 
 <p align="center">
   <img width="460" height="648" src="img/iPhones.png">
@@ -89,4 +89,4 @@ Upon loading the Savings View Controller again, it will update the card view's e
 
 ## Acknowledgments
 
-* Date class extension by Sandeep: https://stackoverflow.com/a/33397770
+Date class extension by Sandeep: https://stackoverflow.com/a/33397770
