@@ -1,6 +1,6 @@
 # Starling Savings
 
-iOS application created as part of the Starling Bank technical challenge by Edward Theodor Danescu.
+iOS prototype companion application for Starling Bank developed by Edward Theodor Danescu.
 
 <p align="center">
   <img width="460" height="648" src="img/iPhones.png">
